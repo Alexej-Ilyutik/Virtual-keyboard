@@ -1,6 +1,5 @@
 import arrKey from './arr.js';
-
-console.log(arrKey[0].en[0][0]);
+import KeyBoard from './KeyBoard.js';
 
 document.body.insertAdjacentHTML(
   'afterbegin',
@@ -8,10 +7,14 @@ document.body.insertAdjacentHTML(
       <header class="header">
         <h1>RSS Virtual Keyboard</h1>
       </header>
-      <main class="main"></main>
+      <main class="main">
+      <div class="main__container">
+       <textarea class="main__input" id="input" rows="10" cols="77"></textarea>
+      </div>
+      </main>
       <footer class="footer">
         <div class="footer__link">
-          <img src="assets/github.svg" alt="GitHub" />
+          <img src="./assets/github.svg" alt="GitHub" />
           <a href="https://github.com/Alexej-Ilyutik" target="_blank">
             Alexej Ilyutik
           </a>
@@ -21,6 +24,5 @@ document.body.insertAdjacentHTML(
     </div>`
 );
 
-const main = document.querySelector('.main');
-
-console.log(main);
+const kbd = new KeyBoard(arrKey);
+kbd.init('.main__container');

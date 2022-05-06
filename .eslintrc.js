@@ -16,5 +16,10 @@ module.exports = {
   'rules': {
     'quote-props': ['error', 'always'],
     'linebreak-style': ['error', 'windows'],
+    'operator-linebreak': [
+      'error',
+      'after',
+      { 'overrides': { '?': 'ignore', ':': 'ignore' } },
+    ],
   },
 };
