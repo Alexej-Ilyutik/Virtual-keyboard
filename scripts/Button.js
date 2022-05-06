@@ -5,14 +5,13 @@ export default class Button {
 
   getDomElement(state) {
     const div = document.createElement('div');
-    div.className = 'key';
+    div.className = `key ${this.btnConfig.code}`;
     if (
       state.hasShiftPressed() &&
       this.btnConfig.code === state.getShiftBtnCode()
     ) {
       div.className += ' shift-key';
     }
-    div.setAttribute('data-code', this.btnConfig.code);
     const btnValue = state.hasShiftPressed()
       ? this.btnConfig[state.getLocale()].shift
       : this.btnConfig[state.getLocale()].small;

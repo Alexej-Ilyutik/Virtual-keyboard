@@ -11,7 +11,7 @@ export default class KeyBoard {
 
   init(selector) {
     this.render();
-    document.querySelector(selector).append(this.mainDiv);
+    document.querySelector(selector).after(this.mainDiv);
     this.initListeners();
   }
 

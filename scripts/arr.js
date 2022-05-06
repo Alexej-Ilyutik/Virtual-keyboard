@@ -20,7 +20,7 @@ const arrKey = [
         'small': '1',
         'shift': '!',
       },
-      'code': 'digit1',
+      'code': 'Digit1',
     },
     {
       'en': {
@@ -31,7 +31,7 @@ const arrKey = [
         'small': '2',
         'shift': '"',
       },
-      'code': 'digit2',
+      'code': 'Digit2',
     },
     {
       'en': {
@@ -42,7 +42,7 @@ const arrKey = [
         'small': '3',
         'shift': '№',
       },
-      'code': 'digit3',
+      'code': 'Digit3',
     },
     {
       'en': {
@@ -53,7 +53,7 @@ const arrKey = [
         'small': '4',
         'shift': ';',
       },
-      'code': 'digit4',
+      'code': 'Digit4',
     },
     {
       'en': {
@@ -64,7 +64,7 @@ const arrKey = [
         'small': '5',
         'shift': '%',
       },
-      'code': 'digit5',
+      'code': 'Digit5',
     },
     {
       'en': {
@@ -75,7 +75,7 @@ const arrKey = [
         'small': '6',
         'shift': ':',
       },
-      'code': 'digit6',
+      'code': 'Digit6',
     },
     {
       'en': {
@@ -86,7 +86,7 @@ const arrKey = [
         'small': '7',
         'shift': '?',
       },
-      'code': 'digit7',
+      'code': 'Digit7',
     },
     {
       'en': {
@@ -97,7 +97,7 @@ const arrKey = [
         'small': '8',
         'shift': '*',
       },
-      'code': 'digit8',
+      'code': 'Digit8',
     },
     {
       'en': {
@@ -108,7 +108,7 @@ const arrKey = [
         'small': '9',
         'shift': '(',
       },
-      'code': 'digit9',
+      'code': 'Digit9',
     },
     {
       'en': {
@@ -119,7 +119,7 @@ const arrKey = [
         'small': '0',
         'shift': ')',
       },
-      'code': 'digit0',
+      'code': 'Digit0',
     },
     {
       'en': {
@@ -312,12 +312,12 @@ const arrKey = [
     },
     {
       'en': {
-        'small': 'Delete',
-        'shift': 'Delete',
+        'small': 'Del',
+        'shift': 'Del',
       },
       'ru': {
-        'small': 'Delete',
-        'shift': 'Delete',
+        'small': 'Del',
+        'shift': 'Del',
       },
       'code': 'Delete',
     },
