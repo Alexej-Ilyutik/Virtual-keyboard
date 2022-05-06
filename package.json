@@ -4,6 +4,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
+    "eslint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,9 +24,11 @@
   },
   "homepage": "https://github.com/Alexej-Ilyutik/Virtual-keyboard#readme",
   "devDependencies": {
-    "eslint": "^8.14.0"
+    "eslint": "^8.14.0",
+    "eslint-plugin-import": "^2.26.0"
   },
   "dependencies": {
     "eslint-config-airbnb-base": "^15.0.0"
-  }
+  },
+  "type": "commonjs"
 }

@@ -1,4 +1,3 @@
-console.log('dd');
-var nam1e = 'f';
-console.log("nam1e");
-let mam1e;
+import arrKey from './arr.js';
+
+console.log(arrKey[0].en[0][0]);
