@@ -591,12 +591,12 @@ const arrKey = [
     },
     {
       'en': {
-        'small': '&#9650;',
-        'shift': '&#9650;',
+        'small': '▲',
+        'shift': '▲',
       },
       'ru': {
-        'small': '&#9650;',
-        'shift': '&#9650;',
+        'small': '▲',
+        'shift': '▲',
       },
       'code': 'ArrowUp',
     },
@@ -670,34 +670,34 @@ const arrKey = [
     },
     {
       'en': {
-        'small': '&#9668;',
-        'shift': '&#9668;',
+        'small': '◄',
+        'shift': '◄',
       },
       'ru': {
-        'small': '&#9668;',
-        'shift': '&#9668;',
+        'small': '◄',
+        'shift': '◄',
       },
       'code': 'ArrowLeft',
     },
     {
       'en': {
-        'small': '&#9660;',
-        'shift': '&#9660;',
+        'small': '▼',
+        'shift': '▼',
       },
       'ru': {
-        'small': '&#9660;',
-        'shift': '&#9660;',
+        'small': '▼',
+        'shift': '▼',
       },
       'code': 'ArrowDown',
     },
     {
       'en': {
-        'small': '&#9658;',
-        'shift': '&#9658;',
+        'small': '►',
+        'shift': '►',
       },
       'ru': {
-        'small': '&#9658;',
-        'shift': '&#9658;',
+        'small': '►',
+        'shift': '►',
       },
       'code': 'ArrowRight',
     },

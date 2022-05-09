@@ -32,12 +32,37 @@ const mainInput = document.querySelector('.main__input');
 
 const kbd = new KeyBoard(arrKey);
 kbd.init('.main__input');
-kbd.printClick(mainInput);
+kbd.print(mainInput, 'en', 'small');
 
-// mainKeyboard.addEventListener('click', (e) => {
-//       console.log(e.target);
-//       // let val = arrKey.find((el) => el.code === e.target.dataset.code);
-//       let val = arrKey[0][0].code;
-//       console.log(val);
-//       mainInput.value += 'x';
-//     });
+
+// document.addEventListener('keydown', function (event) {
+//   if (event.code == 'AltLeft' && event.code == 'ShiftLeft') {
+//     alert('Отменить!');
+//   }
+// });
+
+// function changeLanguage(func, ...args) {
+//   let arrChars = [];
+
+//   document.addEventListener('keydown', function (event) {
+//     if (event.repeat) return; 
+//     arrChars.push(event.code); 
+//   });
+
+//   document.addEventListener('keyup', function (event) {
+//     if (arrChars.length == 0) return; 
+
+//     let runFunc = true;
+//     for (let arg of args) {
+//       if (!arrChars.includes(arg)) {
+//         runFunc = false;
+//         break;
+//       }
+//     }
+//     if (runFunc) func(a, b, c); 
+
+//     arrChars.length = 0; 
+//   });
+// }
+
+// changeLanguage(kbd.print(mainInput, 'ru', 'small'), ['AltLeft', 'ShiftLeft']);

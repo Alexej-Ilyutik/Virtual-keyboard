@@ -18,7 +18,6 @@ export default class Button {
       ? this.btnConfig[state.getLocale()].shift
       : this.btnConfig[state.getLocale()].small;
     div.innerHTML = `<span data-code="${this.btnConfig.code}">${btnValue}</span>`;
-
     return div;
   }
 }
