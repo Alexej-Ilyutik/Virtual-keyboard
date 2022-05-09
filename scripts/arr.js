@@ -648,12 +648,12 @@ const arrKey = [
     },
     {
       'en': {
-        'small': '&ensp;',
-        'shift': '&ensp;',
+        'small': ' ',
+        'shift': ' ',
       },
       'ru': {
-        'small': '&ensp;',
-        'shift': '&ensp;',
+        'small': ' ',
+        'shift': ' ',
       },
       'code': 'Space',
     },

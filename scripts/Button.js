@@ -6,6 +6,8 @@ export default class Button {
   getDomElement(state) {
     const div = document.createElement('div');
     div.className = `key ${this.btnConfig.code}`;
+    div.setAttribute('data-code', `${this.btnConfig.code}`);
+
     if (
       state.hasShiftPressed() &&
       this.btnConfig.code === state.getShiftBtnCode()

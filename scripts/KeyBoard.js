@@ -12,7 +12,7 @@ export default class KeyBoard {
   init(selector) {
     this.render();
     document.querySelector(selector).after(this.mainDiv);
-    this.initListeners();
+    // this.initListeners();
   }
 
   render() {
@@ -29,17 +29,36 @@ export default class KeyBoard {
     });
   }
 
-  reRender() {
-    this.mainDiv.innerHTML = '';
-    this.render();
-  }
+  // reRender() {
+  //   this.mainDiv.innerHTML = '';
+  //   this.render();
+  // }
 
-  initListeners() {
+  // initListeners() {
+  //   this.mainDiv.addEventListener('click', (e) => {
+  //     const btnCode = e.target.dataset.code;
+  //     if (btnCode === 'ShiftLeft' || btnCode === 'ShiftRight') {
+  //       this.state.toggleShiftPressed(btnCode);
+  //       this.reRender();
+  //     }
+  //   });
+  // }
+
+  printClick(area) {
     this.mainDiv.addEventListener('click', (e) => {
       const btnCode = e.target.dataset.code;
-      if (btnCode === 'ShiftLeft' || btnCode === 'ShiftRight') {
-        this.state.toggleShiftPressed(btnCode);
-        this.reRender();
+      if (btnCode === 'Backspace') {
+        area.value = area.value.slice(0, -1);
+      } else if (btnCode === 'Delete') {
+        area.value = area.value.slice(1);
+      } else if (btnCode === 'Enter') {
+        area.value += '\n';
+      } else {
+        this.keyBoardSchema.forEach((row) => {
+          row.forEach((el) => {
+            if (el.code == btnCode) area.value += el.en.small;
+          });
+        });
       }
     });
   }
