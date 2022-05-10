@@ -31,64 +31,33 @@ const mainKeyboard = document.querySelector('.main__keyboard');
 const mainInput = document.querySelector('.main__input');
 
 const kbd = new KeyBoard(arrKey);
-kbd.init('.main__input');
-kbd.print(mainInput, 'en', 'small');
+kbd.init('.main__input', 'en', 'small');
 
-function addPressColor(event) {
-  document
-    .querySelector(`.main__keyboard .key[data-code="${event.code}"]`)
-    .classList.add('active');
+function changeLanguage(...args) {
+  let arrChars = [];
+
+  document.addEventListener('keydown', function (event) {
+    if (event.repeat) return;
+    arrChars.push(event.code);
+  });
+
+  document.addEventListener('keyup', function (event) {
+    if (arrChars.length == 0) return;
+
+    let runFunc = true;
+    for (let arg of args) {
+      if (!arrChars.includes(arg)) {
+        runFunc = false;
+        break;
+      }
+    }
+    if (runFunc) {
+      kbd.mainDiv.innerHTML = '';
+      kbd.init('.main__input', 'ru', 'small');
+    }
+
+    arrChars.length = 0;
+  });
 }
 
-function addClickColor(event) {
-  if (event.target.closest('.key')) {
-    event.target.closest('.key').classList.add('active');
-  }
-}
-
-function removePressColor(event) {
-  document
-    .querySelector(`.main__keyboard .key[data-code="${event.code}"]`)
-    .classList.remove('active');
-}
-
-function removeClickColor(event) {
-  if (event.target.closest('.key')) {
-    event.target.closest('.key').classList.remove('active');
-  }
-}
-
-document.addEventListener('keydown', addPressColor);
-document.addEventListener('mousedown', addClickColor);
-document.addEventListener('keyup', removePressColor);
-document.addEventListener('mouseup', removeClickColor);
-
-document.addEventListener('click', (e)=>{
-  console.log(e.target.getAttribute('data-code'));
-});
-
-// function changeLanguage(func, ...args) {
-//   let arrChars = [];
-
-//   document.addEventListener('keydown', function (event) {
-//     if (event.repeat) return;
-//     arrChars.push(event.code);
-//   });
-
-//   document.addEventListener('keyup', function (event) {
-//     if (arrChars.length == 0) return;
-
-//     let runFunc = true;
-//     for (let arg of args) {
-//       if (!arrChars.includes(arg)) {
-//         runFunc = false;
-//         break;
-//       }
-//     }
-//     if (runFunc) func(a, b, c);
-
-//     arrChars.length = 0;
-//   });
-// }
-
-// changeLanguage(kbd.print(mainInput, 'ru', 'small'), ['AltLeft', 'ShiftLeft']);
+changeLanguage('AltLeft', 'ShiftLeft');

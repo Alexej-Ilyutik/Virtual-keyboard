@@ -92,10 +92,10 @@ body {
   border-right: 2px solid var(--text-color);
   border-radius: 5px;
   cursor: pointer;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-.key:hover{
+.key:hover {
   transform: scale(1.03);
 }
 
@@ -136,20 +136,6 @@ body {
 .ArrowRight,
 .ControlRight {
   background-color: var(--main-color);
-}
-
-.Backspace span,
-.Tab span,
-.Delete span,
-.CapsLock span,
-.Enter span,
-.ShiftLeft span,
-.ShiftRight span,
-.ControlLeft span,
-.MetaLeft span,
-.AltLeft span,
-.AltRight span,
-.ControlRight span {
   font-size: 0.8rem;
 }
 
@@ -179,7 +165,7 @@ body {
   width: 435px;
 }
 
-.active{
+.active {
   background-color: var(--pressBtn-color);
 }
 
