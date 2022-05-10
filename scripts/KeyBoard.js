@@ -10,75 +10,84 @@ export default class KeyBoard {
     this.mainInput = document.querySelector('.main__input');
   }
 
-  init(selector) {
-    this.render();
+  init(selector, lang, size) {
+    this.render(lang, size);
     document.querySelector(selector).after(this.mainDiv);
-    this.initListeners();
+    this.addAnimation();
+    this.print();
+    // this.initListeners();
   }
 
-  render() {
+  render(lang, size) {
     this.keyBoardSchema.forEach((row) => {
       let div = document.createElement('div');
       div.className = 'row';
       row.forEach((btnConfig) => {
         let btn = new Button(btnConfig);
-        this.btns[btnConfig.code] = btn;
-        div.append(btn.getDomElement(this.state));
+        div.append(btn.getElement(btnConfig[lang][size]));
       });
       this.mainDiv.className = 'main__keyboard';
       this.mainDiv.append(div);
     });
   }
 
-  reRender() {
-    this.mainDiv.innerHTML = '';
-    this.render();
+  addAnimation() {
+    function addPressColor(event) {
+      document
+        .querySelector(`.main__keyboard .key[data-code="${event.code}"]`)
+        .classList.add('active');
+    }
+
+    function addClickColor(event) {
+      let keyTarget = event.target.classList;
+      if (keyTarget.contains('key')) {
+        keyTarget.add('active');
+      }
+    }
+
+    function removePressColor(event) {
+      document
+        .querySelector(`.main__keyboard .key[data-code="${event.code}"]`)
+        .classList.remove('active');
+    }
+
+    function removeClickColor(event) {
+      let keyTarget = event.target.classList;
+      if (keyTarget.contains('key')) {
+        keyTarget.remove('active');
+      }
+    }
+
+    document.addEventListener('keydown', addPressColor);
+    document.addEventListener('mousedown', addClickColor);
+    document.addEventListener('keyup', removePressColor);
+    document.addEventListener('mouseup', removeClickColor);
   }
 
-  initListeners() {
-    this.mainDiv.addEventListener('click', (e) => {
-      const btnCode = e.target.dataset.code;
-      if (
-        btnCode === 'ShiftLeft' ||
-        btnCode === 'ShiftRight' ||
-        btnCode === 'CapsLock'
-      ) {
-        this.state.toggleShiftPressed(btnCode);
-        this.reRender();
-        // if (this.state.hasShiftPressed()) {
-        //   this.print(this.mainInput, 'en', 'shift');
-        // } else {
-        //   this.print(this.mainInput, 'en', 'small');
-        // }
+  print() {
+    document.addEventListener('click', (e) => {
+      let keyTarget = e.target.classList;
+      if (keyTarget.contains('key')) {
+        const btnCode = e.target.dataset.code;
+        if (btnCode === 'Backspace') {
+          this.mainInput.value = this.mainInput.value.slice(0, -1);
+        } else if (btnCode === 'Tab') {
+          this.mainInput.value += '    ';
+        } else if (btnCode === 'Delete') {
+          this.mainInput.value = this.mainInput.value.slice(1);
+        } else if (btnCode === 'Enter') {
+          this.mainInput.value += '\n';
+        } else if (
+          btnCode === 'ShiftLeft' ||
+          btnCode === 'ShiftRight' ||
+          btnCode === 'CapsLock'
+        ) {
+          this.mainInput.value += '';
+        } else {
+          this.mainInput.value += e.target.innerHTML;
+        }
       }
     });
   }
 
-  print(area, lang, size) {
-    this.mainDiv.addEventListener('click', (e) => {
-      const btnCode = e.target.dataset.code;
-      if (btnCode === 'Backspace') {
-        area.value = area.value.slice(0, -1);
-      } else if (btnCode === 'Tab') {
-        area.value += '    ';
-      } else if (btnCode === 'Delete') {
-        area.value = area.value.slice(1);
-      } else if (btnCode === 'Enter') {
-        area.value += '\n';
-      } else if (
-        btnCode === 'ShiftLeft' ||
-        btnCode === 'ShiftRight' ||
-        btnCode === 'CapsLock'
-      ) {
-        area.value += '';
-      } else {
-        this.keyBoardSchema.forEach((row) => {
-          row.forEach((el) => {
-            let language = el[lang];
-            if (el.code == btnCode) area.value += language[size];
-          });
-        });
-      }
-    });
-  }
 }

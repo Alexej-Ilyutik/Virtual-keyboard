@@ -31,38 +31,33 @@ const mainKeyboard = document.querySelector('.main__keyboard');
 const mainInput = document.querySelector('.main__input');
 
 const kbd = new KeyBoard(arrKey);
-kbd.init('.main__input');
-kbd.print(mainInput, 'en', 'small');
+kbd.init('.main__input', 'en', 'small');
 
+function changeLanguage(...args) {
+  let arrChars = [];
 
-// document.addEventListener('keydown', function (event) {
-//   if (event.code == 'AltLeft' && event.code == 'ShiftLeft') {
-//     alert('Отменить!');
-//   }
-// });
+  document.addEventListener('keydown', function (event) {
+    if (event.repeat) return;
+    arrChars.push(event.code);
+  });
 
-// function changeLanguage(func, ...args) {
-//   let arrChars = [];
+  document.addEventListener('keyup', function (event) {
+    if (arrChars.length == 0) return;
 
-//   document.addEventListener('keydown', function (event) {
-//     if (event.repeat) return; 
-//     arrChars.push(event.code); 
-//   });
+    let runFunc = true;
+    for (let arg of args) {
+      if (!arrChars.includes(arg)) {
+        runFunc = false;
+        break;
+      }
+    }
+    if (runFunc) {
+      kbd.mainDiv.innerHTML = '';
+      kbd.init('.main__input', 'ru', 'small');
+    }
 
-//   document.addEventListener('keyup', function (event) {
-//     if (arrChars.length == 0) return; 
+    arrChars.length = 0;
+  });
+}
 
-//     let runFunc = true;
-//     for (let arg of args) {
-//       if (!arrChars.includes(arg)) {
-//         runFunc = false;
-//         break;
-//       }
-//     }
-//     if (runFunc) func(a, b, c); 
-
-//     arrChars.length = 0; 
-//   });
-// }
-
-// changeLanguage(kbd.print(mainInput, 'ru', 'small'), ['AltLeft', 'ShiftLeft']);
+changeLanguage('AltLeft', 'ShiftLeft');
