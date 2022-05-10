@@ -34,23 +34,49 @@ const kbd = new KeyBoard(arrKey);
 kbd.init('.main__input');
 kbd.print(mainInput, 'en', 'small');
 
+function addPressColor(event) {
+  document
+    .querySelector(`.main__keyboard .key[data-code="${event.code}"]`)
+    .classList.add('active');
+}
 
-// document.addEventListener('keydown', function (event) {
-//   if (event.code == 'AltLeft' && event.code == 'ShiftLeft') {
-//     alert('Отменить!');
-//   }
-// });
+function addClickColor(event) {
+  if (event.target.closest('.key')) {
+    event.target.closest('.key').classList.add('active');
+  }
+}
+
+function removePressColor(event) {
+  document
+    .querySelector(`.main__keyboard .key[data-code="${event.code}"]`)
+    .classList.remove('active');
+}
+
+function removeClickColor(event) {
+  if (event.target.closest('.key')) {
+    event.target.closest('.key').classList.remove('active');
+  }
+}
+
+document.addEventListener('keydown', addPressColor);
+document.addEventListener('mousedown', addClickColor);
+document.addEventListener('keyup', removePressColor);
+document.addEventListener('mouseup', removeClickColor);
+
+document.addEventListener('click', (e)=>{
+  console.log(e.target.getAttribute('data-code'));
+});
 
 // function changeLanguage(func, ...args) {
 //   let arrChars = [];
 
 //   document.addEventListener('keydown', function (event) {
-//     if (event.repeat) return; 
-//     arrChars.push(event.code); 
+//     if (event.repeat) return;
+//     arrChars.push(event.code);
 //   });
 
 //   document.addEventListener('keyup', function (event) {
-//     if (arrChars.length == 0) return; 
+//     if (arrChars.length == 0) return;
 
 //     let runFunc = true;
 //     for (let arg of args) {
@@ -59,9 +85,9 @@ kbd.print(mainInput, 'en', 'small');
 //         break;
 //       }
 //     }
-//     if (runFunc) func(a, b, c); 
+//     if (runFunc) func(a, b, c);
 
-//     arrChars.length = 0; 
+//     arrChars.length = 0;
 //   });
 // }
 
