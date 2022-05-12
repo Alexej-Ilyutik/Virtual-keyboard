@@ -1,24 +1,32 @@
 import Button from './Button.js';
-import State from './State.js';
 
 export default class KeyBoard {
   constructor(keyBoardSchema) {
     this.keyBoardSchema = keyBoardSchema;
     this.btns = [];
-    this.state = new State();
+    this.lang = 'ru';
+    this.capsLock = false;
     this.mainDiv = document.createElement('div');
     this.mainInput = document.querySelector('.main__input');
   }
 
-  init(selector, lang, size) {
-    this.render(lang, size);
+  init(selector) {
+    let localLang;
+    if (localStorage.getItem('lang') === null) {
+      localLang = 'en';
+    } else {
+      localLang = localStorage.getItem('lang');
+    }
+    this.render(localLang, 'small');
+    this.renderLanguage('AltLeft', 'ShiftLeft');
+    this.renderCapsLk();
     document.querySelector(selector).after(this.mainDiv);
     this.addAnimation();
     this.print();
-    // this.initListeners();
   }
 
   render(lang, size) {
+    this.mainDiv.innerHTML = '';
     this.keyBoardSchema.forEach((row) => {
       let div = document.createElement('div');
       div.className = 'row';
@@ -80,6 +88,11 @@ export default class KeyBoard {
         } else if (
           btnCode === 'ShiftLeft' ||
           btnCode === 'ShiftRight' ||
+          btnCode === 'ControlLeft' ||
+          btnCode === 'MetaLeft' ||
+          btnCode === 'AltLeft' ||
+          btnCode === 'AltRight' ||
+          btnCode === 'ControlRight' ||
           btnCode === 'CapsLock'
         ) {
           this.mainInput.value += '';
@@ -90,4 +103,65 @@ export default class KeyBoard {
     });
   }
 
+  renderCapsLk() {
+    document.addEventListener('click', (e) => {
+      const btnCode = e.target.dataset.code;
+      if (btnCode === 'CapsLock' && this.capsLock === false) {
+        this.capsLock = true;
+        this.render('en', 'shift');
+      } else if (btnCode === 'CapsLock' && this.capsLock === true) {
+        this.capsLock = false;
+        this.render('en', 'small');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'CapsLock' && this.capsLock === false) {
+        this.capsLock = true;
+        this.render('en', 'shift');
+      } else if (e.code === 'CapsLock' && this.capsLock === true) {
+        this.capsLock = false;
+        this.render('en', 'small');
+      }
+    });
+  }
+
+  renderLanguage(...args) {
+    let arrChars = [];
+
+    document.addEventListener('keydown', (event) => {
+      if (event.repeat) return;
+      arrChars.push(event.code);
+    });
+
+    document.addEventListener('keyup', () => {
+      if (arrChars.length == 0) return;
+
+      let runFunc = true;
+      for (let arg of args) {
+        if (!arrChars.includes(arg)) {
+          runFunc = false;
+          break;
+        }
+      }
+      if (runFunc && this.lang === 'en' && this.capsLock === true) {
+        this.lang = 'ru';
+        localStorage.setItem('lang', 'en');
+        this.render(localStorage.getItem('lang'), 'shift');
+      } else if (runFunc && this.lang === 'ru' && this.capsLock === true) {
+        this.lang = 'en';
+        localStorage.setItem('lang', 'ru');
+        this.render(localStorage.getItem('lang'), 'shift');
+      } else if (runFunc && this.lang === 'en' && this.capsLock === false) {
+        this.lang = 'ru';
+        localStorage.setItem('lang', 'en');
+        this.render(localStorage.getItem('lang'), 'small');
+      } else if (runFunc && this.lang === 'ru' && this.capsLock === false) {
+        this.lang = 'en';
+        localStorage.setItem('lang', 'ru');
+        this.render(localStorage.getItem('lang'), 'small');
+      }
+      arrChars.length = 0;
+    });
+  }
 }

@@ -27,37 +27,6 @@ document.body.insertAdjacentHTML(
     </div>`
 );
 
-const mainKeyboard = document.querySelector('.main__keyboard');
-const mainInput = document.querySelector('.main__input');
-
 const kbd = new KeyBoard(arrKey);
-kbd.init('.main__input', 'en', 'small');
 
-function changeLanguage(...args) {
-  let arrChars = [];
-
-  document.addEventListener('keydown', function (event) {
-    if (event.repeat) return;
-    arrChars.push(event.code);
-  });
-
-  document.addEventListener('keyup', function (event) {
-    if (arrChars.length == 0) return;
-
-    let runFunc = true;
-    for (let arg of args) {
-      if (!arrChars.includes(arg)) {
-        runFunc = false;
-        break;
-      }
-    }
-    if (runFunc) {
-      kbd.mainDiv.innerHTML = '';
-      kbd.init('.main__input', 'ru', 'small');
-    }
-
-    arrChars.length = 0;
-  });
-}
-
-changeLanguage('AltLeft', 'ShiftLeft');
+kbd.init('.main__input');
