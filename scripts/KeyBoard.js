@@ -6,19 +6,22 @@ export default class KeyBoard {
     this.keyBoardSchema = keyBoardSchema;
     this.btns = [];
     this.state = new State();
+    this.capsLock = false;
     this.mainDiv = document.createElement('div');
     this.mainInput = document.querySelector('.main__input');
   }
 
-  init(selector, lang, size) {
-    this.render(lang, size);
+  init(selector) {
+    this.render('en', 'small');
+    this.renderCapsLk();
+    // this.render();
     document.querySelector(selector).after(this.mainDiv);
     this.addAnimation();
     this.print();
-    // this.initListeners();
   }
 
   render(lang, size) {
+    // console.log(this.capsLock);
     this.keyBoardSchema.forEach((row) => {
       let div = document.createElement('div');
       div.className = 'row';
@@ -80,6 +83,11 @@ export default class KeyBoard {
         } else if (
           btnCode === 'ShiftLeft' ||
           btnCode === 'ShiftRight' ||
+          btnCode === 'ControlLeft' ||
+          btnCode === 'MetaLeft' ||
+          btnCode === 'AltLeft' ||
+          btnCode === 'AltRight' ||
+          btnCode === 'ControlRight' ||
           btnCode === 'CapsLock'
         ) {
           this.mainInput.value += '';
@@ -90,4 +98,30 @@ export default class KeyBoard {
     });
   }
 
+  renderCapsLk() {
+    document.addEventListener('click', (e) => {
+      const btnCode = e.target.dataset.code;
+      if (btnCode === 'CapsLock' && this.capsLock === false) {
+        this.capsLock = true;
+        this.mainDiv.innerHTML = '';
+        this.render('en', 'shift');
+      } else if (btnCode === 'CapsLock' && this.capsLock === true) {
+        this.capsLock = false;
+        this.mainDiv.innerHTML = '';
+        this.render('en', 'small');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'CapsLock' && this.capsLock === false) {
+        this.capsLock = true;
+        this.mainDiv.innerHTML = '';
+        this.render('en', 'shift');
+      } else if (e.code === 'CapsLock' && this.capsLock === true) {
+        this.capsLock = false;
+        this.mainDiv.innerHTML = '';
+        this.render('en', 'small');
+      }
+    });
+  }
 }

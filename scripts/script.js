@@ -31,7 +31,8 @@ const mainKeyboard = document.querySelector('.main__keyboard');
 const mainInput = document.querySelector('.main__input');
 
 const kbd = new KeyBoard(arrKey);
-kbd.init('.main__input', 'en', 'small');
+// console.log(kbd);
+kbd.init('.main__input');
 
 function changeLanguage(...args) {
   let arrChars = [];
@@ -61,3 +62,4 @@ function changeLanguage(...args) {
 }
 
 changeLanguage('AltLeft', 'ShiftLeft');
+
