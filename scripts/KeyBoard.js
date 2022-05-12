@@ -99,6 +99,19 @@ export default class KeyBoard {
         }
       }
     });
+
+    document.addEventListener('keydown', (e) => {
+  
+      if (e.code === 'ArrowUp') {
+        this.mainInput.value += this.keyBoardSchema[3][11]['en']['small'];
+      } else if (e.code === 'ArrowLeft') {
+        this.mainInput.value += this.keyBoardSchema[4][5]['en']['small'];
+      } else if (e.code === 'ArrowDown') {
+        this.mainInput.value += this.keyBoardSchema[4][6]['en']['small'];
+      } else if (e.code === 'ArrowRight') {
+        this.mainInput.value += this.keyBoardSchema[4][7]['en']['small'];
+      }
+    });
   }
 
   renderCapsLk() {
