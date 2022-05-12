@@ -34,32 +34,32 @@ const kbd = new KeyBoard(arrKey);
 // console.log(kbd);
 kbd.init('.main__input');
 
-function changeLanguage(...args) {
-  let arrChars = [];
+// function changeLanguage(...args) {
+//   let arrChars = [];
 
-  document.addEventListener('keydown', function (event) {
-    if (event.repeat) return;
-    arrChars.push(event.code);
-  });
+//   document.addEventListener('keydown', function (event) {
+//     if (event.repeat) return;
+//     arrChars.push(event.code);
+//   });
 
-  document.addEventListener('keyup', function (event) {
-    if (arrChars.length == 0) return;
+//   document.addEventListener('keyup', function (event) {
+//     if (arrChars.length == 0) return;
 
-    let runFunc = true;
-    for (let arg of args) {
-      if (!arrChars.includes(arg)) {
-        runFunc = false;
-        break;
-      }
-    }
-    if (runFunc) {
-      kbd.mainDiv.innerHTML = '';
-      kbd.init('.main__input', 'ru', 'small');
-    }
+//     let runFunc = true;
+//     for (let arg of args) {
+//       if (!arrChars.includes(arg)) {
+//         runFunc = false;
+//         break;
+//       }
+//     }
+//     if (runFunc) {
+//       kbd.mainDiv.innerHTML = '';
+//       kbd.init('.main__input', 'ru', 'small');
+//     }
 
-    arrChars.length = 0;
-  });
-}
+//     arrChars.length = 0;
+//   });
+// }
 
-changeLanguage('AltLeft', 'ShiftLeft');
+// changeLanguage('AltLeft', 'ShiftLeft');
 
