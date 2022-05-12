@@ -5,14 +5,20 @@ export default class KeyBoard {
   constructor(keyBoardSchema) {
     this.keyBoardSchema = keyBoardSchema;
     this.btns = [];
-    this.lang = 'en';
+    this.lang = 'ru';
     this.capsLock = false;
     this.mainDiv = document.createElement('div');
     this.mainInput = document.querySelector('.main__input');
   }
 
   init(selector) {
-    this.render('en', 'small');
+    let localLang;
+    if (localStorage.getItem('lang') === null) {
+      localLang = 'en';
+    } else {
+      localLang = localStorage.getItem('lang');
+    }
+    this.render(localLang, 'small');
     this.renderLanguage('AltLeft', 'ShiftLeft');
     this.renderCapsLk();
     document.querySelector(selector).after(this.mainDiv);
@@ -141,18 +147,20 @@ export default class KeyBoard {
       }
       if (runFunc && this.lang === 'en' && this.capsLock === true) {
         this.lang = 'ru';
-        this.render('en', 'shift');
-        console.log(this.capsLock);
+        localStorage.setItem('lang', 'en');
+        this.render(localStorage.getItem('lang'), 'shift');
       } else if (runFunc && this.lang === 'ru' && this.capsLock === true) {
         this.lang = 'en';
-        this.render('ru', 'shift');
-        console.log(this.capsLock);
+        localStorage.setItem('lang', 'ru');
+        this.render(localStorage.getItem('lang'), 'shift');
       } else if (runFunc && this.lang === 'en' && this.capsLock === false) {
         this.lang = 'ru';
-        this.render('en', 'small');
+        localStorage.setItem('lang', 'en');
+        this.render(localStorage.getItem('lang'), 'small');
       } else if (runFunc && this.lang === 'ru' && this.capsLock === false) {
         this.lang = 'en';
-        this.render('ru', 'small');
+        localStorage.setItem('lang', 'ru');
+        this.render(localStorage.getItem('lang'), 'small');
       }
       arrChars.length = 0;
     });
