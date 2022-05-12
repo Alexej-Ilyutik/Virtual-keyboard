@@ -1,5 +1,4 @@
 import Button from './Button.js';
-import State from './State.js';
 
 export default class KeyBoard {
   constructor(keyBoardSchema) {
