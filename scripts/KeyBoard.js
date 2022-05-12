@@ -11,15 +11,13 @@ export default class KeyBoard {
   }
 
   init(selector) {
-    let localLang;
     if (localStorage.getItem('lang') === null) {
-      localLang = 'en';
-    } else {
-      localLang = localStorage.getItem('lang');
+      localStorage.setItem('lang', 'en');
     }
-    this.render(localLang, 'small');
+    this.render(localStorage.getItem('lang'), 'small');
     this.renderLanguage('AltLeft', 'ShiftLeft');
     this.renderCapsLk();
+    this.renderShift();
     document.querySelector(selector).after(this.mainDiv);
     this.addAnimation();
     this.print();
@@ -108,20 +106,36 @@ export default class KeyBoard {
       const btnCode = e.target.dataset.code;
       if (btnCode === 'CapsLock' && this.capsLock === false) {
         this.capsLock = true;
-        this.render('en', 'shift');
+        this.render(localStorage.getItem('lang'), 'shift');
       } else if (btnCode === 'CapsLock' && this.capsLock === true) {
         this.capsLock = false;
-        this.render('en', 'small');
+        this.render(localStorage.getItem('lang'), 'small');
       }
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.code === 'CapsLock' && this.capsLock === false) {
         this.capsLock = true;
-        this.render('en', 'shift');
+        this.render(localStorage.getItem('lang'), 'shift');
       } else if (e.code === 'CapsLock' && this.capsLock === true) {
         this.capsLock = false;
-        this.render('en', 'small');
+        this.render(localStorage.getItem('lang'), 'small');
+      }
+    });
+  }
+
+  renderShift() {
+    document.addEventListener('mousedown', (e) => {
+      const btnCode = e.target.dataset.code;
+      if (btnCode === 'ShiftLeft' || btnCode === 'ShiftRight') {
+        this.render(localStorage.getItem('lang'), 'shift');
+      }
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      const btnCode = e.target.dataset.code;
+      if (btnCode === 'ShiftLeft' || btnCode === 'ShiftRight') {
+        this.render(localStorage.getItem('lang'), 'small');
       }
     });
   }
@@ -134,8 +148,24 @@ export default class KeyBoard {
       arrChars.push(event.code);
     });
 
-    document.addEventListener('keyup', () => {
+    document.addEventListener('keyup', (e) => {
       if (arrChars.length == 0) return;
+
+      if (arrChars.length == 1) {
+        if (
+          (e.code === 'ShiftLeft' && this.capsLock === false) ||
+          (e.code === 'ShiftRight' && this.capsLock === false)
+        ) {
+          this.capsLock = true;
+          this.render(localStorage.getItem('lang'), 'shift');
+        } else if (
+          (e.code === 'ShiftLeft' && this.capsLock === true) ||
+          (e.code === 'ShiftRight' && this.capsLock === true)
+        ) {
+          this.capsLock = false;
+          this.render(localStorage.getItem('lang'), 'small');
+        }
+      }
 
       let runFunc = true;
       for (let arg of args) {
